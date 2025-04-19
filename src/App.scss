@@ -1,0 +1,32 @@
+.app {
+  height: 100%;
+  display: grid;
+  grid-template:
+    "friends messages" 1fr
+    "friends input" auto
+    / auto 1fr;
+  gap: 20px;
+  padding: 20px;
+  background-color: var(--c-tertiary);
+
+  &__input {
+    grid-area: input;
+    border-radius: var(--br);
+    background-color: var(--c-primary);
+    overflow: hidden;
+  }
+
+  &__friends {
+    grid-area: friends;
+    border-radius: var(--br);
+    background-color: var(--c-primary);
+    overflow: hidden;
+  }
+
+  &__messages {
+    grid-area: messages;
+    border-radius: var(--br);
+    background-color: var(--c-primary);
+    overflow: hidden;
+  }
+}

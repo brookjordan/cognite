@@ -1,0 +1,51 @@
+.friends-area {
+  height: 100%;
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-content: start;
+  gap: 10px;
+
+  button {
+    padding: 10px 20px;
+    background-color: var(--c-secondary);
+    width: 100%;
+  }
+
+  &__friend-list {
+    display: grid;
+    align-content: start;
+    overflow-y: auto;
+  }
+
+  &__friend-list > * {
+    padding: 10px 20px;
+  }
+
+  &__no-friends-message {
+    padding: 10px 20px;
+    color: var(--c-text-secondary);
+  }
+
+  &__friend {
+    color: var(--c-text-secondary);
+    &--is-active {
+      background-color: var(--c-primary);
+      color: var(--c-text-primary);
+    }
+  }
+
+  &__unread-count {
+    place-items: center;
+    display: inline-grid;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    // TODO: magin-numbers, revise
+    height: 16px;
+    min-width: 16px;
+    border-radius: 9999px;
+    text-align: center;
+    padding: 2px;
+  }
+}

@@ -1,0 +1,37 @@
+.messages-area {
+  display: grid;
+  height: 100%;
+  padding: 10px;
+  overflow-y: auto;
+  align-content: start;
+
+  &__message {
+    --br: 5px;
+
+    background: rgb(190, 158, 226);
+    padding: 5px;
+
+    &--from-me {
+      background: rgb(243, 192, 137);
+    }
+
+    &--from-me + &--from-them,
+    &--from-them + &--from-me,
+    &:first-child {
+      border-top-left-radius: var(--br);
+      border-top-right-radius: var(--br);
+    }
+
+    &--from-me:has(+ #{&}--from-them),
+    &--from-them:has(+ #{&}--from-me),
+    &:last-child {
+      border-bottom-left-radius: var(--br);
+      border-bottom-right-radius: var(--br);
+    }
+
+    &--from-me + &--from-them,
+    &--from-them + &--from-me {
+      margin-top: 20px;
+    }
+  }
+}
