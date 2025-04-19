@@ -1,12 +1,77 @@
+@keyframes up-out-0 {
+  from {
+    transform: translateY(0px);
+    opacity: 1;
+    background-color: var(--c-background-primary);
+  }
+
+  to {
+    transform: translateY(-50px);
+    opacity: 0;
+    background-color: var(--c-purple-8);
+  }
+}
+
+@keyframes up-out-1 {
+  from {
+    transform: translateY(0px);
+    opacity: 1;
+    background-color: var(--c-background-primary);
+  }
+
+  to {
+    transform: translateY(-50px);
+    opacity: 0;
+    background-color: var(--c-purple-8);
+  }
+}
+
 .input-area {
   display: grid;
+  justify-content: end;
 
-  input {
+  button {
+    display: none;
+  }
+
+  &__form {
+    position: relative;
+  }
+
+  &__input,
+  &__alternate-input--no-0,
+  &__alternate-input--no-1 {
     width: 100%;
     padding: 10px 20px;
+    field-sizing: content;
+    border-radius: var(--br);
+    background-color: var(--c-primary);
 
-    &:disabled {
-      color: grey;
+    &:disabled,
+    &::placeholder {
+      color: var(--c-text-secondary);
     }
+  }
+
+  &__alternate-input--no-0,
+  &__alternate-input--no-1 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    animation: var(--delay-long) backwards;
+    transform: translateY(-50px);
+    opacity: 0;
+    pointer-events: none;
+    background-color: var(--c-purple-8);
+    width: unset;
+    justify-self: end;
+  }
+
+  &__alternate-input--no-0 {
+    animation-name: up-out-0;
+  }
+
+  &__alternate-input--no-1 {
+    animation-name: up-out-1;
   }
 }

@@ -29,16 +29,23 @@
 
   &__friend {
     color: var(--c-text-secondary);
+    box-shadow: inset 0 0 0 0 var(--c-blue-6);
+    transition: box-shadow var(--delay-short);
+
     &--is-active {
       background-color: var(--c-primary);
       color: var(--c-text-primary);
+    }
+
+    &:focus-visible {
+      box-shadow: inset 0 0 0 2px var(--c-blue-6);
     }
   }
 
   &__unread-count {
     place-items: center;
     display: inline-grid;
-    background-color: red;
+    background-color: var(--c-red-6);
     color: white;
     font-size: 10px;
     // TODO: magin-numbers, revise

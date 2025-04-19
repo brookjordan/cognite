@@ -20,22 +20,22 @@ function MessagesArea() {
     [currentFriend?.messages.length]
   );
 
-  const handleMessageScroll = () => {
-    if (!messagesArea.current) {
-      return;
-    }
+  const lastMessageId = currentFriend?.messages.at(-1)?.id;
+  useEffect(
+    function scrollToBottomOnNewMessage() {
+      if (!lastMessageId || !messagesArea.current) {
+        return;
+      }
 
-    isAtBottom.current =
-      messagesArea.current.scrollHeight - messagesArea.current.scrollTop ===
-      messagesArea.current.clientHeight;
-  };
+      isAtBottom.current =
+        messagesArea.current.scrollHeight - messagesArea.current.scrollTop ===
+        messagesArea.current.clientHeight;
+    },
+    [lastMessageId]
+  );
 
   return (
-    <div
-      className="messages-area"
-      ref={messagesArea}
-      onScroll={handleMessageScroll}
-    >
+    <div className="messages-area" ref={messagesArea}>
       {!friends.length
         ? "Add your first friend on the left!"
         : currentFriend?.messages.length

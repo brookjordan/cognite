@@ -4,16 +4,14 @@
   grid-template:
     "friends messages" 1fr
     "friends input" auto
-    / auto 1fr;
+    / minmax(min-content, auto) minmax(min-content, 800px);
   gap: 20px;
   padding: 20px;
   background-color: var(--c-tertiary);
+  justify-content: center;
 
   &__input {
     grid-area: input;
-    border-radius: var(--br);
-    background-color: var(--c-primary);
-    overflow: hidden;
   }
 
   &__friends {

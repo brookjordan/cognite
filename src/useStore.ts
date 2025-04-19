@@ -81,8 +81,6 @@ export const useStore = create<{
       return {
         ...state,
         friends: state.friends.map((f) => {
-          console.log(f);
-          console.log(state);
           if (f === (from ?? state.currentFriend)) {
             f.messages = [...f.messages, hydratedMessage as Message];
           }

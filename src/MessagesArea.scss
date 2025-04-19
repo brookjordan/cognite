@@ -1,18 +1,32 @@
+@keyframes up-in {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .messages-area {
   display: grid;
   height: 100%;
   padding: 10px;
   overflow-y: auto;
   align-content: start;
+  justify-items: start;
+  color: var(--c-text-secondary);
 
   &__message {
-    --br: 5px;
-
-    background: rgb(190, 158, 226);
-    padding: 5px;
+    background: var(--c-orange-8);
+    padding: 10px 20px;
+    color: var(--c-text-primary);
+    animation: up-in var(--delay-long) backwards;
 
     &--from-me {
-      background: rgb(243, 192, 137);
+      background: var(--c-purple-8);
+      justify-self: end;
     }
 
     &--from-me + &--from-them,
@@ -32,6 +46,13 @@
     &--from-me + &--from-them,
     &--from-them + &--from-me {
       margin-top: 20px;
+    }
+
+    &--from-me {
+      border-bottom-right-radius: 0 !important;
+    }
+    &--from-them {
+      border-bottom-left-radius: 0 !important;
     }
   }
 }
