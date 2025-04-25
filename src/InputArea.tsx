@@ -1,11 +1,11 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { MESSAGES } from "./FriendsArea";
 import { useStore } from "./useStore";
 import "./InputArea.scss";
-import { MESSAGES } from "./FriendsArea";
 
 function InputArea() {
   const input = useRef<HTMLInputElement>(null);
-  const { currentFriend, friends, addMessage } = useStore();
+  const { currentFriend, friends, addMessage, updateTyping } = useStore();
   const [alt, setAlt] = useState(-1);
   const [previousMessage, setPreviousMessage] = useState("");
 
@@ -20,17 +20,24 @@ function InputArea() {
     [currentFriend]
   );
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
-    console.log(input.current);
-    if (!input.current) {
+  const handleChangeTyping = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!currentFriend) {
       return;
     }
 
-    addMessage(input.current.value);
-    setPreviousMessage(input.current.value);
-    input.current.value = "";
+    updateTyping(e.currentTarget.value, currentFriend);
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!currentFriend?.typing) {
+      return;
+    }
+
+    addMessage(currentFriend.typing);
+    setPreviousMessage(currentFriend.typing);
+    updateTyping("", currentFriend);
     setAlt((prevAlt) => (prevAlt + 1) % 2);
 
     setTimeout(() => {
@@ -56,6 +63,8 @@ function InputArea() {
           ref={input}
           disabled={!currentFriend}
           type="search"
+          value={currentFriend?.typing}
+          onChange={handleChangeTyping}
           autoFocus
           placeholder={
             currentFriend

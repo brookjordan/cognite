@@ -21,14 +21,17 @@ export interface Friend extends NewFriend {
   id: string;
   messages: Message[];
   style: keyof typeof MESSAGES;
+  typing: string;
 }
 
 export const useStore = create<{
   friends: Friend[];
   currentFriend: Friend | null;
+
   addFriend: (friend: NewFriend) => Friend;
   setCurrentFriend: (friend: Friend) => void;
   addMessage: (text: string, from?: Friend | null) => Message;
+  updateTyping: (text: string, friend: Friend) => void;
 }>((set) => ({
   friends: [] as Friend[],
 
@@ -53,6 +56,7 @@ export const useStore = create<{
       ...newFriend,
       messages: [],
       id: makeUUID(),
+      typing: "",
       style: messageStyles[
         Math.floor(Math.random() * messageStyles.length)
       ] as keyof typeof MESSAGES,
@@ -90,5 +94,17 @@ export const useStore = create<{
     });
 
     return hydratedMessage as Message;
+  },
+
+  updateTyping(text: string, toFriend: Friend) {
+    set((state) => ({
+      ...state,
+      friends: state.friends.map((friend) => {
+        if (friend === toFriend) {
+          friend.typing = text;
+        }
+        return friend;
+      }),
+    }));
   },
 }));
